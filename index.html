@@ -32,11 +32,11 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, .font-tech {
+        h1, h2, h3, h4, .font-tech {
             font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* Background Visuals */
+        /* Background Dinâmico */
         .grid-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -45,7 +45,7 @@
             background-size: 50px 50px;
             z-index: -1;
             mask-image: radial-gradient(ellipse at center, black, transparent 80%);
-            opacity: 0.5;
+            opacity: 0.4;
         }
 
         .hero-glow {
@@ -58,7 +58,7 @@
         }
 
         header {
-            padding: 140px 20px 100px;
+            padding: 140px 20px 80px;
             text-align: center;
         }
 
@@ -68,7 +68,7 @@
             color: var(--neon-green);
             padding: 6px 16px;
             border-radius: 100px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -90,7 +90,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Buttons */
         .btn-main {
             background: var(--neon-green);
             color: #000;
@@ -98,38 +97,84 @@
             border-radius: 8px;
             text-decoration: none;
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             display: inline-block;
             transition: 0.3s all cubic-bezier(0.23, 1, 0.32, 1);
             box-shadow: 0 0 20px var(--green-glow);
             text-transform: uppercase;
             border: none;
+            cursor: pointer;
         }
 
         .btn-main:hover {
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-5px);
             box-shadow: 0 0 40px var(--neon-green);
             filter: brightness(1.1);
         }
 
         section {
-            padding: 100px 20px;
+            padding: 90px 20px;
             max-width: 1200px;
             margin: auto;
         }
 
         h2 {
-            font-size: 2.8rem;
-            margin-bottom: 60px;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
             text-align: center;
             letter-spacing: -1px;
         }
 
-        /* Features */
+        /* Seção: O que o App Faz */
+        .app-function-box {
+            background: rgba(0, 255, 136, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 60px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .app-content { flex: 1.2; }
+        .app-content h2 { text-align: left; margin-bottom: 20px; }
+        
+        .app-list { list-style: none; margin-top: 30px; }
+        .app-list li {
+            margin-bottom: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            font-size: 1.05rem;
+        }
+
+        .app-list li i {
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+
+        .app-visual {
+            flex: 0.8;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .report-preview {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--neon-green);
+            line-height: 1.4;
+        }
+
+        /* Grid de Pilares */
         .grid-tech {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 25px;
         }
 
         .card-tech {
@@ -137,48 +182,26 @@
             border: 1px solid rgba(255,255,255,0.05);
             padding: 40px;
             border-radius: 16px;
-            position: relative;
-            overflow: hidden;
             transition: 0.4s;
         }
 
-        .card-tech::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
-            transform: translateX(-100%);
-            transition: 0.6s;
-        }
+        .card-tech:hover { border-color: var(--neon-green); transform: translateY(-5px); }
+        .card-tech h3 { color: var(--neon-green); font-size: 1.4rem; margin-bottom: 15px; text-transform: uppercase; }
 
-        .card-tech:hover::before { transform: translateX(100%); }
-
-        .card-tech:hover {
-            border-color: var(--neon-green);
-            background: rgba(11, 18, 36, 0.8);
-        }
-
-        .card-tech h3 {
-            color: var(--neon-green);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        /* Comparison Table */
+        /* Tabela Comparativa Atualizada */
         .table-wrapper {
             background: var(--bg-surface);
             border-radius: 20px;
             padding: 2px;
             background: linear-gradient(180deg, var(--border), transparent);
+            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             background: var(--bg-surface);
-            border-radius: 18px;
-            overflow: hidden;
+            min-width: 700px;
         }
 
         th, td {
@@ -187,70 +210,74 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        th { font-size: 1.2rem; color: var(--neon-green); text-transform: uppercase; }
+        th { font-size: 1rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+        .highlight-col { color: var(--neon-green); font-weight: bold; }
 
-        /* Power Section */
-        .power-section {
-            background: radial-gradient(circle at top right, rgba(0, 255, 136, 0.1), transparent);
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            padding: 80px 40px;
-            text-align: center;
-        }
-
-        .power-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin: 60px 0;
-        }
-
-        .power-item h4 {
-            font-size: 2rem;
-            color: var(--neon-green);
-            margin-bottom: 10px;
-        }
-
-        .power-item p { color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
-
-        /* FAQ */
-        .faq-box {
-            max-width: 800px;
+        /* Protocolos de Acesso (FAQ) */
+        .faq-grid {
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        details {
+        .faq-item {
             background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             margin-bottom: 15px;
-            padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
         }
 
-        details[open] { border-color: var(--neon-green); }
-        summary { font-weight: bold; font-size: 1.1rem; list-style: none; }
+        .faq-item summary {
+            padding: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-item summary::after {
+            content: "+";
+            color: var(--neon-green);
+            font-size: 1.5rem;
+        }
+
+        .faq-item[open] summary::after { content: "-"; }
+
+        .faq-item p {
+            padding: 0 25px 25px;
+            color: var(--text-dim);
+            font-size: 1rem;
+        }
+
+        /* Power Stats */
+        .power-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+            background: rgba(0, 255, 136, 0.03);
+            padding: 50px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .power-item h4 { font-size: 3rem; color: var(--neon-green); line-height: 1; }
+        .power-item p { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; margin-top: 10px; }
 
         footer {
-            padding: 100px 20px;
+            padding: 80px 20px;
             text-align: center;
             border-top: 1px solid var(--border);
-            background: #010409;
+            color: var(--text-dim);
+            font-size: 0.9rem;
         }
 
-        /* Animation */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 20px var(--green-glow); }
-            50% { box-shadow: 0 0 40px var(--green-glow); }
-            100% { box-shadow: 0 0 20px var(--green-glow); }
-        }
-
-        .pulse { animation: pulse 3s infinite; }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            h2 { font-size: 2rem; }
-            .power-section { padding: 40px 20px; }
+        @media (max-width: 992px) {
+            .app-function-box { flex-direction: column; padding: 30px; }
+            h1 { font-size: 3.2rem; }
         }
     </style>
 </head>
@@ -261,90 +288,110 @@
 <div class="hero-glow"></div>
 
 <header>
-    <div class="badge-tech">Quantum System V2.0</div>
+    <div class="badge-tech">Quantum Engine v2.4.2</div>
     <h1>TRIBUTOPRIME <br><span class="gradient-text">RADAR</span></h1>
-    <p style="font-size: 1.4rem; color: var(--text-dim); max-width: 800px; margin: 0 auto 40px;">
-        A engine definitiva para decifrar a Reforma Tributária. <br>Processamento de dados em escala real para máxima economia fiscal.
+    <p style="font-size: 1.3rem; color: var(--text-dim); max-width: 750px; margin: 0 auto 40px;">
+        A inteligência analítica de ponta para decifrar a Reforma Tributária e blindar o seu caixa em tempo real.
     </p>
-    <a class="btn-main pulse" href="https://pay.kirvano.com/7c527ee5-c1a4-468e-b9fc-4dcd44c496b1">ATIVAR RADAR AGORA</a>
+    <a class="btn-main" href="https://pay.kirvano.com/7c527ee5-c1a4-468e-b9fc-4dcd44c496b1">ATIVAR LICENÇA AGORA</a>
 </header>
 
 <section>
-    <h2><span class="gradient-text">TECNOLOGIA</span> DE DOMÍNIO FISCAL</h2>
+    <!-- Seção: O que o App Faz -->
+    <div class="app-function-box">
+        <div class="app-content">
+            <div class="badge-tech">Processamento de Dados</div>
+            <h2>O que o <span class="highlight" style="color:var(--neon-green)">TributoPrime Radar</span> faz?</h2>
+            <p style="color: var(--text-dim);">
+                Nossa engine não apenas calcula, ela realiza um <strong>escaneamento profundo</strong> da sua saúde fiscal para garantir que você esteja sempre no regime de menor custo.
+            </p>
+            <ul class="app-list">
+                <li><i>[✓]</i> <strong>Diagnóstico Completo IBS/CBS:</strong> Relatório detalhado com o impacto da transição para a nova carga tributária.</li>
+                <li><i>[✓]</i> <strong>Simulador Simples Nacional:</strong> Análise de viabilidade comparativa entre regimes especiais e a nova lei.</li>
+                <li><i>[✓]</i> <strong>Previsão de Ganhos:</strong> Algoritmo de projeção que identifica onde você terá maior margem de lucro.</li>
+    
+        </div>
+        <div class="app-visual">
+            <div class="report-preview">
+                [SYSTEM LOG: ACTIVE]<br>
+                > ANALYSING TAX_INFO... OK<br>
+                > CALCULATING IBS/CBS... DONE<br>
+                > SIMULATING SIMPLES_NACIONAL... SUCCESS<br>
+                > GENERATING EARNINGS_FORECAST... <br>
+                > <span style="color: white; background: #007744;"> RESULT: OPTIMIZED </span><br><br>
+                --- ENGINE OUTPUT ---<br>
+                REFORMA IMPACT: -14.2% TAX<br>
+                PROFIT FORECAST: +R$ 42.800/yr<br>
+                STATUS: READY TO DOWNLOAD
+            </div>
+        </div>
+    </div>
+
+    <h2>PILARES DE <span class="gradient-text">PERFORMANCE</span></h2>
     <div class="grid-tech">
         <div class="card-tech">
             <h3>IA DE PONTA</h3>
-            <p>Redes neurais treinadas nos textos oficiais da Reforma (IBS/CBS) para garantir zero erro na transição do seu regime tributário.</p>
+            <p>Redes neurais atualizadas em tempo real com o texto final da Reforma Tributária.</p>
         </div>
         <div class="card-tech">
             <h3>PROCESSAMENTO EXTREMO</h3>
-            <p>Varredura completa de dados fiscais em milissegundos. Analisamos milhões de combinações para encontrar o menor imposto possível.</p>
+            <p>Varredura de dados complexos em menos de 30 segundos com 99.9% de precisão técnica.</p>
         </div>
         <div class="card-tech">
             <h3>VALOR ÚNICO</h3>
-            <p>Acesso democrático à tecnologia de nível Big Four. Inteligência de elite acessível para qualquer tamanho de empresa.</p>
+            <p>Tecnologia de nível corporativo acessível em um formato de aplicação intuitivo e rápido.</p>
         </div>
     </div>
 </section>
 
 <section>
-    <div class="power-section">
-        <h2 style="margin-bottom: 20px;">PERFORMANCE SISTÊMICA</h2>
-        <p style="color: var(--text-dim);">Resultados baseados em dados, não em palpites.</p>
-        
-        <div class="power-grid">
-            <div class="power-item">
-                <h4>99.9%</h4>
-                <p>Precisão Algorítmica</p>
-            </div>
-            <div class="power-item">
-                <h4>< 30s</h4>
-                <p>Tempo de Resposta</p>
-            </div>
-            <div class="power-item">
-                <h4>ZERO</h4>
-                <p>Margem de Erro Humano</p>
-            </div>
+    <div class="power-grid">
+        <div class="power-item">
+            <h4>99.9%</h4>
+            <p>Precisão Técnica</p>
         </div>
-
-        <div style="background: rgba(0,0,0,0.3); padding: 30px; border-radius: 15px; border: 1px dashed var(--neon-green);">
-            <p style="font-size: 1.2rem; font-weight: bold; color: var(--neon-green);">SISTEMA DISPONÍVEL PARA INTEGRAÇÃO IMEDIATA</p>
-            <p style="font-size: 0.9rem; margin-top: 10px;">Lote de acesso tecnológico limitado por demanda de processamento.</p>
+        <div class="power-item">
+            <h4>&lt; 30s</h4>
+            <p>Tempo de Resposta</p>
+        </div>
+        <div class="power-item">
+            <h4>ZERO</h4>
+            <p>Margem de Erro</p>
         </div>
     </div>
 </section>
 
 <section>
-    <h2>ANÁLISE COMPARATIVA</h2>
+    <h2>ANÁLISE <span class="gradient-text">COMPARATIVA</span></h2>
     <div class="table-wrapper">
         <table>
             <thead>
                 <tr>
                     <th>MÉTRICA</th>
                     <th>MÉTODO TRADICIONAL</th>
-                    <th style="color: var(--neon-green);">RADAR ENGINE</th>
+                    <th class="highlight-col">RADAR ENGINE</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Cálculo IBS/CBS</td>
                     <td>Estimado / Manual</td>
-                    <td style="color: var(--neon-green); font-weight: bold;">Exatidão Matemática</td>
+                    <td class="highlight-col">Exatidão Matemática</td>
                 </tr>
                 <tr>
                     <td>Custo de Operação</td>
                     <td>R$ 5.000+ p/ consultoria</td>
-                    <td style="color: var(--neon-green); font-weight: bold;">Valor Único Acessível</td>
+                    <td class="highlight-col">Valor Único Acessível</td>
                 </tr>
                 <tr>
                     <td>Segurança de Dados</td>
                     <td>Envio por E-mail</td>
-                    <td style="color: var(--neon-green); font-weight: bold;">Criptografia Militar</td>
+                    <td class="highlight-col">Criptografia Militar</td>
                 </tr>
                 <tr>
                     <td>Velocidade</td>
                     <td>Dias de espera</td>
-                    <td style="color: var(--neon-green); font-weight: bold;">Real-Time</td>
+                    <td class="highlight-col">Real-Time</td>
                 </tr>
             </tbody>
         </table>
@@ -352,33 +399,33 @@
 </section>
 
 <section>
-    <h2 class="text-center">PROTOCOLOS DE ACESSO</h2>
-    <div class="faq-box">
-        <details>
+    <h2>PROTOCOLOS DE <span class="gradient-text">ACESSO</span></h2>
+    <div class="faq-grid">
+        <details class="faq-item">
             <summary>Como o processamento é realizado?</summary>
-            <p style="padding-top:10px; color: var(--text-dim);">Nossa IA cruza os dados do seu faturamento com as novas alíquotas de destino e origem do IBS/CBS, simulando cenários reais de 2026 a 2033.</p>
+            <p>O Radar utiliza uma engine proprietária que cruza seus dados de faturamento com os algoritmos da nova legislação (IBS/CBS), simulando o cenário fiscal completo até 2033.</p>
         </details>
-        <details>
+        <details class="faq-item">
             <summary>O sistema é atualizado conforme a lei muda?</summary>
-            <p style="padding-top:10px; color: var(--text-dim);">Sim. Nossa base de dados é conectada aos órgãos oficiais, garantindo que qualquer mudança no Senado seja integrada ao algoritmo em tempo real.</p>
+            <p>Sim. Nossa equipe de engenharia e tributaristas atualiza o core do sistema assim que qualquer nova emenda ou regulamentação é publicada pelo Governo Federal.</p>
         </details>
-        <details>
+        <details class="faq-item">
             <summary>Qual o nível de segurança das informações?</summary>
-            <p style="padding-top:10px; color: var(--text-dim);">Utilizamos protocolos SSL de 256 bits e anonimização de dados conforme a LGPD.</p>
+            <p>Utilizamos padrões de segurança bancária com criptografia AES-256 bits. Seus dados são processados em ambiente isolado e nunca são compartilhados com terceiros.</p>
         </details>
     </div>
 </section>
 
 <section style="text-align: center;">
-    <h2 style="margin-bottom: 20px;">PRONTO PARA O <span class="gradient-text">UPGRADE?</span></h2>
-    <p style="margin-bottom: 40px; color: var(--text-dim);">O futuro tributário não espera. Proteja sua lucratividade agora.</p>
-    <a class="btn-main" href="https://pay.kirvano.com/7c527ee5-c1a4-468e-b9fc-4dcd44c496b1">ADQUIRIR LICENÇA DE USO</a>
+    <h2 style="margin-bottom: 20px;">PRONTO PARA O <span class="gradient-text">PRÓXIMO NÍVEL?</span></h2>
+    <p style="margin-bottom: 40px; color: var(--text-dim);">Assuma o controle total da sua estratégia tributária hoje mesmo.</p>
+    <a class="btn-main" href="https://pay.kirvano.com/7c527ee5-c1a4-468e-b9fc-4dcd44c496b1">GARANTIR ACESSO IMEDIATO</a>
 </section>
 
 <footer>
     <div class="badge-tech" style="margin-bottom: 20px;">TRIBUTOPRIME RADAR SYSTEM</div>
-    <p style="color: var(--text-dim); font-size: 0.9rem;">© 2026 - Tecnologia de Alta Performance para Inteligência Fiscal.</p>
-    <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 10px;">Algoritmo v2.4.2 - Todos os direitos reservados.</p>
+    <p>© 2026 - Tecnologia de Alta Performance para Inteligência Fiscal.</p>
+    <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.5;">A tecnologia que transforma dados fiscais em lucro líquido.</p>
 </footer>
 
 </body>
