@@ -3,430 +3,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TributoPrime Radar</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>TributoPrime Radar | Inteligência Fiscal Estratégica</title>
     
+    <!-- Fonts: Plus Jakarta Sans (Moderna e Premium) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --bg-deep: #020817;       /* Azul Espacial Profundo */
-            --bg-surface: #0B1224;    /* Superfície de Cards */
-            --neon-green: #00FF88;    /* Verde Hyper-Neon */
-            --green-glow: rgba(0, 255, 136, 0.4);
-            --text-main: #F8FAFC;
+            --bg-deep: #020617;        /* Azul Oxford Profundo */
+            --bg-surface: #0F172A;     /* Azul Marinha Suave */
+            --accent: #A3E635;         /* Verde Lima (Prosperidade/Alerta) */
+            --accent-hover: #BEF264;
+            --text-white: #F8FAFC;
             --text-dim: #94A3B8;
-            --border: rgba(0, 255, 136, 0.15);
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(163, 230, 53, 0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
         body {
-            font-family: 'Inter', sans-serif;
             background-color: var(--bg-deep);
-            color: var(--text-main);
+            color: var(--text-white);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, h4, .font-tech {
-            font-family: 'Space Grotesk', sans-serif;
+        /* Ambientação Visual (Finclass Style) */
+        .grid-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(var(--border) 1px, transparent 1px);
+            background-size: 50px 50px; z-index: -2; opacity: 0.3;
         }
 
-        /* Background Dinâmico */
-        .grid-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(var(--border) 1px, transparent 1px), 
-                              linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
-            opacity: 0.4;
+        .glow {
+            position: absolute; width: 40vw; height: 40vw;
+            background: radial-gradient(circle, rgba(163, 230, 53, 0.08) 0%, transparent 70%);
+            z-index: -1; pointer-events: none;
         }
 
-        .hero-glow {
-            position: absolute;
-            top: -10%; left: 50%;
-            transform: translateX(-50%);
-            width: 80%; height: 600px;
-            background: radial-gradient(circle, rgba(0, 255, 136, 0.08) 0%, transparent 70%);
-            z-index: -1;
+        /* Header (Kirvano Style) */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 7%; background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(15px); position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid var(--border);
         }
 
-        header {
-            padding: 140px 20px 80px;
-            text-align: center;
+        .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+        .nav-status { font-size: 0.7rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Hero Section (Nigro Style) */
+        .hero {
+            padding: 160px 7% 100px; text-align: center; max-width: 1200px; margin: auto;
         }
 
-        .badge-tech {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--neon-green);
-            color: var(--neon-green);
-            padding: 6px 16px;
-            border-radius: 100px;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-            display: inline-block;
+        .tag {
+            background: rgba(163, 230, 53, 0.1); color: var(--accent);
+            padding: 8px 20px; border-radius: 50px; font-size: 0.75rem;
+            font-weight: 800; letter-spacing: 2px; margin-bottom: 30px; display: inline-block;
+            border: 1px solid var(--border);
         }
 
         h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 700;
-            line-height: 0.95;
-            letter-spacing: -3px;
-            margin-bottom: 30px;
+            font-size: clamp(2.2rem, 5vw, 4.2rem); font-weight: 800;
+            line-height: 1.1; letter-spacing: -2px; margin-bottom: 30px;
         }
 
-        .gradient-text {
-            background: linear-gradient(180deg, #FFFFFF 0%, var(--neon-green) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hero p {
+            font-size: 1.2rem; color: var(--text-dim); max-width: 800px; margin: 0 auto 40px;
         }
 
         .btn-main {
-            background: var(--neon-green);
-            color: #000;
-            padding: 22px 48px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 1.1rem;
-            display: inline-block;
-            transition: 0.3s all cubic-bezier(0.23, 1, 0.32, 1);
-            box-shadow: 0 0 20px var(--green-glow);
+            background: var(--accent); color: #020617; padding: 22px 45px;
+            border-radius: 12px; font-weight: 800; font-size: 1.1rem;
+            text-decoration: none; display: inline-block; transition: 0.4s;
+            box-shadow: 0 15px 40px rgba(163, 230, 53, 0.2);
             text-transform: uppercase;
-            border: none;
-            cursor: pointer;
         }
 
-        .btn-main:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 40px var(--neon-green);
-            filter: brightness(1.1);
-        }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(163, 230, 53, 0.4); background: #fff; }
 
-        section {
-            padding: 90px 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            text-align: center;
-            letter-spacing: -1px;
-        }
-
-        /* Seção: O que o App Faz */
-        .app-function-box {
-            background: rgba(0, 255, 136, 0.02);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 60px;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            margin-bottom: 60px;
-        }
-
-        .app-content { flex: 1.2; }
-        .app-content h2 { text-align: left; margin-bottom: 20px; }
+        /* Awareness Section Cards */
+        .section-padding { padding: 100px 7%; max-width: 1300px; margin: auto; }
         
-        .app-list { list-style: none; margin-top: 30px; }
-        .app-list li {
-            margin-bottom: 18px;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            font-size: 1.05rem;
+        .card-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px; margin-top: 60px;
         }
 
-        .app-list li i {
-            color: var(--neon-green);
-            font-weight: bold;
+        .glass-card {
+            background: var(--bg-surface); border: 1px solid var(--border);
+            padding: 40px; border-radius: 24px; transition: 0.3s;
         }
 
-        .app-visual {
-            flex: 0.8;
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        .glass-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .glass-card i { font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block; }
+        .glass-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: #fff; }
+        .glass-card p { color: var(--text-dim); font-size: 0.95rem; }
+
+        /* Timeline Section */
+        .timeline {
+            background: var(--bg-surface); padding: 100px 7%; margin: 80px 0;
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
         }
 
-        .report-preview {
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            color: var(--neon-green);
-            line-height: 1.4;
+        .timeline-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px; margin-top: 50px;
         }
 
-        /* Grid de Pilares */
-        .grid-tech {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+        .time-box {
+            padding: 30px; border-left: 2px solid var(--accent); background: rgba(255,255,255,0.02);
         }
 
-        .card-tech {
-            background: var(--bg-surface);
+        .time-box h4 { color: var(--accent); font-size: 1.2rem; margin-bottom: 10px; }
+
+        /* 6 Steps Section (New) */
+        .steps-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px; margin-top: 50px;
+        }
+
+        .step-item {
+            display: flex; gap: 20px; align-items: flex-start;
+            background: var(--glass); padding: 25px; border-radius: 16px;
             border: 1px solid rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 16px;
-            transition: 0.4s;
         }
 
-        .card-tech:hover { border-color: var(--neon-green); transform: translateY(-5px); }
-        .card-tech h3 { color: var(--neon-green); font-size: 1.4rem; margin-bottom: 15px; text-transform: uppercase; }
-
-        /* Tabela Comparativa Atualizada */
-        .table-wrapper {
-            background: var(--bg-surface);
-            border-radius: 20px;
-            padding: 2px;
-            background: linear-gradient(180deg, var(--border), transparent);
-            overflow-x: auto;
+        .step-num {
+            background: var(--accent); color: #000; width: 40px; height: 40px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; flex-shrink: 0;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--bg-surface);
-            min-width: 700px;
+        /* Comparison Table (Premium) */
+        .table-box {
+            background: var(--bg-surface); border: 1px solid var(--border);
+            border-radius: 24px; overflow-x: auto; margin: 50px 0;
         }
 
-        th, td {
-            padding: 25px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        th, td { padding: 25px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); }
+        .accent-row { color: var(--accent); font-weight: 700; }
 
-        th { font-size: 1rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
-        .highlight-col { color: var(--neon-green); font-weight: bold; }
-
-        /* Protocolos de Acesso (FAQ) */
-        .faq-grid {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-
-        .faq-item summary {
-            padding: 25px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-item summary::after {
-            content: "+";
-            color: var(--neon-green);
-            font-size: 1.5rem;
-        }
-
-        .faq-item[open] summary::after { content: "-"; }
-
-        .faq-item p {
-            padding: 0 25px 25px;
-            color: var(--text-dim);
-            font-size: 1rem;
-        }
-
-        /* Power Stats */
-        .power-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            text-align: center;
-            background: rgba(0, 255, 136, 0.03);
-            padding: 50px;
-            border-radius: 30px;
-            border: 1px solid var(--border);
-        }
-
-        .power-item h4 { font-size: 3rem; color: var(--neon-green); line-height: 1; }
-        .power-item p { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; margin-top: 10px; }
+        /* FAQ */
+        .faq { max-width: 850px; margin: 80px auto; }
+        details { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 15px; cursor: pointer; }
+        summary { font-weight: 700; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+        summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; }
 
         footer {
-            padding: 80px 20px;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            color: var(--text-dim);
-            font-size: 0.9rem;
+            padding: 100px 7% 50px; text-align: center; border-top: 1px solid var(--border);
+            background: #01040D;
         }
 
-        @media (max-width: 992px) {
-            .app-function-box { flex-direction: column; padding: 30px; }
-            h1 { font-size: 3.2rem; }
+        .disclaimer {
+            font-size: 0.7rem; color: var(--text-dim); opacity: 0.5;
+            max-width: 900px; margin: 40px auto; line-height: 2; text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .section-padding { padding: 60px 5%; }
         }
     </style>
 </head>
-
 <body>
 
-<div class="grid-overlay"></div>
-<div class="hero-glow"></div>
+    <div class="grid-bg"></div>
+    <div class="glow" style="top: 0; right: 0;"></div>
 
-<header>
-    <div class="badge-tech">Quantum Engine v2.4.2</div>
-    <h1>TRIBUTOPRIME <br><span class="gradient-text">RADAR</span></h1>
-    <p style="font-size: 1.3rem; color: var(--text-dim); max-width: 750px; margin: 0 auto 40px;">
-        A inteligência analítica de ponta para decifrar a Reforma Tributária e blindar o seu caixa em tempo real.
-    </p>
-    <a class="btn-main" href="https://pay.kirvano.com/7c527ee5-c1a4-468e-b9fc-4dcd44c496b1">ATIVAR LICENÇA AGORA</a>
-</header>
+    <nav>
+        <div class="logo">TRIBUTOPRIME <span>RADAR</span></div>
+        <div class="nav-status"><i class="fas fa-shield-alt"></i> Segurança Ativa</div>
+    </nav>
 
-<section>
-    <!-- Seção: O que o App Faz -->
-    <div class="app-function-box">
-        <div class="app-content">
-            <div class="badge-tech">Processamento de Dados</div>
-            <h2>O que o <span class="highlight" style="color:var(--neon-green)">TributoPrime Radar</span> faz?</h2>
-            <p style="color: var(--text-dim);">
-                Nossa engine não apenas calcula, ela realiza um <strong>escaneamento profundo</strong> da sua saúde fiscal para garantir que você esteja sempre no regime de menor custo.
-            </p>
-            <ul class="app-list">
-                <li><i>[✓]</i> <strong>Diagnóstico Completo IBS/CBS:</strong> Relatório detalhado com o impacto da transição para a nova carga tributária.</li>
-                <li><i>[✓]</i> <strong>Simulador Simples Nacional:</strong> Análise de viabilidade comparativa entre regimes especiais e a nova lei.</li>
-                <li><i>[✓]</i> <strong>Previsão de Ganhos:</strong> Algoritmo de projeção que identifica onde você terá maior margem de lucro.</li>
-    
-        </div>
-        <div class="app-visual">
-            <div class="report-preview">
-                [SYSTEM LOG: ACTIVE]<br>
-                > ANALYSING TAX_INFO... OK<br>
-                > CALCULATING IBS/CBS... DONE<br>
-                > SIMULATING SIMPLES_NACIONAL... SUCCESS<br>
-                > GENERATING EARNINGS_FORECAST... <br>
-                > <span style="color: white; background: #007744;"> RESULT: OPTIMIZED </span><br><br>
-                --- ENGINE OUTPUT ---<br>
-                REFORMA IMPACT: -14.2% TAX<br>
-                PROFIT FORECAST: +R$ 42.800/yr<br>
-                STATUS: READY TO DOWNLOAD
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="tag">MANUAL DE SOBREVIVÊNCIA TRIBUTÁRIA</div>
+            <h1>O Radar que protege o lucro que você levou <span style="color: var(--accent)">anos para construir.</span></h1>
+            <p>A Reforma Tributária não é um evento único, é um labirinto de 7 anos. Atravessá-la sem um mapa estratégico não é coragem, é negligência com seu patrimônio.</p>
+            <a href="https://pay.kirvano.com/7c527ee5-c1a4-468e-b9fc-4dcd44c496b1" class="btn-main">OBTER O PROTOCOLO DE DIREÇÃO</a>
+        </section>
+
+        <!-- AWARENESS -->
+        <section class="section-padding">
+            <h2 style="text-align: center; font-size: 2.2rem;">Você está pilotando um negócio <span style="color: var(--accent)">às cegas?</span></h2>
+            <div class="card-grid">
+                <div class="glass-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>O Ponto de Inflexão</h3>
+                    <p>Muitas empresas do Simples Nacional pagarão MAIS impostos que no Lucro Presumido a partir de 2026. O Radar detecta o dia exato da sua transição.</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-vault"></i>
+                    <h3>A Armadilha do Caixa</h3>
+                    <p>O CBS e IBS mudarão o fluxo de créditos. Sem o Radar, seu capital de giro pode colapsar antes mesmo da reforma terminar.</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-file-signature"></i>
+                    <h3>O Manual de Execução</h3>
+                    <p>Não entregamos apenas "o que" muda, mas o "Como Fazer": os passos sequenciais para reestruturar seu faturamento agora.</p>
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <h2>PILARES DE <span class="gradient-text">PERFORMANCE</span></h2>
-    <div class="grid-tech">
-        <div class="card-tech">
-            <h3>IA DE PONTA</h3>
-            <p>Redes neurais atualizadas em tempo real com o texto final da Reforma Tributária.</p>
-        </div>
-        <div class="card-tech">
-            <h3>PROCESSAMENTO EXTREMO</h3>
-            <p>Varredura de dados complexos em menos de 30 segundos com 99.9% de precisão técnica.</p>
-        </div>
-        <div class="card-tech">
-            <h3>VALOR ÚNICO</h3>
-            <p>Tecnologia de nível corporativo acessível em um formato de aplicação intuitivo e rápido.</p>
-        </div>
-    </div>
-</section>
+        <!-- TIMELINE -->
+        <section class="timeline">
+            <div style="max-width: 1300px; margin: auto;">
+                <h2 style="text-align: center;">Útil agora. <span style="color:var(--accent)">Vital até 2033.</span></h2>
+                <div class="timeline-grid">
+                    <div class="time-box">
+                        <h4>AGORA</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-dim);">Fase de Diagnóstico. Antecipação de cenários e proteção do caixa atual.</p>
+                    </div>
+                    <div class="time-box">
+                        <h4>2026-2027</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-dim);">Início da Transição. Monitoramento em tempo real do IBS/CBS e ajustes.</p>
+                    </div>
+                    <div class="time-box">
+                        <h4>2028-2032</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-dim);">Extinção gradual dos tributos. Recalculamos sua rota a cada mudança mensal.</p>
+                    </div>
+                    <div class="time-box">
+                        <h4>2033+</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-dim);">Estabilização. Consolidação com segurança jurídica e conformidade total.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<section>
-    <div class="power-grid">
-        <div class="power-item">
-            <h4>99.9%</h4>
-            <p>Precisão Técnica</p>
+        <!-- METODO -->
+        <section class="section-padding">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; align-items: center;">
+                <div>
+                    <span style="color: var(--accent); font-weight: 800; letter-spacing: 2px;">MÉTODO TRIBUTOPRIME</span>
+                    <h2 style="font-size: 2.5rem; margin: 20px 0;">Informação de valor é apenas o <span style="color:var(--accent)">ponto de partida.</span></h2>
+                    <p style="color: var(--text-dim);">Saber "o que" acontece é o básico. Focamos no que importa para o sucesso:</p>
+                    
+                    <div style="margin-top: 30px;">
+                        <div style="margin-bottom: 25px;">
+                            <h4 style="color: var(--accent);"><i class="fas fa-map-marked-alt"></i> Direção Estratégica</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-dim);">O caminho para seu CNPJ prosperar na nova matriz fiscal.</p>
+                        </div>
+                        <div style="margin-bottom: 25px;">
+                            <h4 style="color: var(--accent);"><i class="fas fa-list-check"></i> Os Passos a Seguir</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-dim);">Roteiro sequencial de ações preventivas trimestrais.</p>
+                        </div>
+                        <div style="margin-bottom: 25px;">
+                            <h4 style="color: var(--accent);"><i class="fas fa-gears"></i> O "Como Fazer"</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-dim);">Transformamos complexidade técnica em execução simplificada.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: var(--bg-surface); padding: 40px; border-radius: 30px; border: 1px solid var(--accent); box-shadow: 0 0 30px rgba(163,230,53,0.1);">
+                    <h3 style="margin-bottom: 25px;">VALOR IMENSURÁVEL</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 20px;"><i class="fas fa-check-circle" style="color: var(--accent);"></i> <strong>Elimine a Paralisia:</strong> Decisões baseadas em dados reais.</li>
+                        <li style="margin-bottom: 20px;"><i class="fas fa-check-circle" style="color: var(--accent);"></i> <strong>Antecipe a Concorrência:</strong> Saia na frente enquanto o mercado espera.</li>
+                        <li style="margin-bottom: 20px;"><i class="fas fa-check-circle" style="color: var(--accent);"></i> <strong>Custo de Oportunidade:</strong> Economia massiva comparada ao investimento.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- DELIVERABLES (Bento Grid) -->
+        <section class="section-padding">
+            <h2 style="text-align: center; margin-bottom: 50px;">O que você terá em <span style="color:var(--accent)">suas mãos:</span></h2>
+            <div class="card-grid">
+                <div class="glass-card">
+                    <i class="fas fa-search-dollar"></i>
+                    <h3>Scanner IBS/CBS</h3>
+                    <p>Análise cirúrgica da nova carga tributária aplicada ao seu faturamento real. Zero suposições.</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-shield-halved"></i>
+                    <h3>Blindagem Simples</h3>
+                    <p>Descubra se o Simples Nacional ainda é seu aliado ou se tornou um ralo de recursos.</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-file-lines"></i>
+                    <h3>Plano de Ação</h3>
+                    <p>Relatório executivo com os passos táticos para cada etapa da transição tributária.</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-landmark"></i>
+                    <h3>Suporte de Governança</h3>
+                    <p>Diretrizes prontas para alinhar sua empresa com as novas exigências de transparência fiscal.</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-rotate"></i>
+                    <h3>Atualização Infinita</h3>
+                    <p>O Radar se adapta a cada nova portaria. Você estará um passo à frente da lei até 2033.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6 STEPS (Processo) -->
+        <section class="section-padding" style="background: rgba(163, 230, 53, 0.02); border-radius: 50px;">
+            <div style="text-align: center; max-width: 800px; margin: auto;">
+                <h2 style="font-size: 2.2rem; margin-bottom: 20px;">Sua parte é simples, a entrega é <span style="color:var(--accent)">individualizada.</span></h2>
+                <p style="color: var(--text-dim);">Nossa inteligência processa os dados e em segundos te dá a resposta que você precisa.</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h4 style="color: var(--accent);">Coleta Eficiente</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Você preenche apenas 8 campos com informações simples do seu negócio.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h4 style="color: var(--accent);">Melhor Escolha</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Saiba qual é a melhor escolha tributária e entenda exatamente o porquê.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h4 style="color: var(--accent);">Comparação Real</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Veja a comparação detalhada da carga tributária entre o cenário atual e o futuro.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">4</div>
+                    <div>
+                        <h4 style="color: var(--accent);">Otimização</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Otimizações de alto impacto detalhadas para você aplicar imediatamente.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">5</div>
+                    <div>
+                        <h4 style="color: var(--accent);">Roteiro Estratégico</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Um passo a passo sequencial para guiar sua gestão nos próximos anos.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">6</div>
+                    <div>
+                        <h4 style="color: var(--accent);">Resposta Financeira</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Saiba exatamente: "Quanto dinheiro estou deixando de ganhar?" com entrega profissional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TABLE -->
+        <section class="section-padding">
+            <h2 style="text-align: center;">Por que líderes escolhem o <span style="color:var(--accent)">Radar?</span></h2>
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>DIMENSÃO</th>
+                            <th>CONSULTORIA COMUM</th>
+                            <th class="accent-row">TRIBUTOPRIME RADAR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Velocidade</td>
+                            <td>Semanas de reuniões</td>
+                            <td class="accent-row">Segundos de processamento</td>
+                        </tr>
+                        <tr>
+                            <td>Base de Dados</td>
+                            <td>Subjetiva / Manual</td>
+                            <td class="accent-row">Legislação Integrada em Tempo Real</td>
+                        </tr>
+                        <tr>
+                            <td>Custo</td>
+                            <td>R$ 5.000 a R$ 20.000</td>
+                            <td class="accent-row">Custa menos que um café ao dia</td>
+                        </tr>
+                        <tr>
+                            <td>Pós-Entrega</td>
+                            <td>Relatório estático</td>
+                            <td class="accent-row">Acompanhamento contínuo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section-padding">
+            <h2 style="text-align: center; margin-bottom: 40px;">Protocolos de <span style="color: var(--accent)">Confiança</span></h2>
+            <div class="faq">
+                <details>
+                    <summary>Como os dados são protegidos?</summary>
+                    <p style="padding-top:15px; color: var(--text-dim);">Utilizamos criptografia de nível bancário e processamento anonimizado, garantindo total conformidade com a LGPD e sigilo empresarial.</p>
+                </details>
+                <details>
+                    <summary>O sistema substitui meu contador?</summary>
+                    <p style="padding-top:15px; color: var(--text-dim);">Não. Ele empodera seu contador com dados e cenários que nenhuma planilha comum consegue prever, servindo como uma ferramenta de apoio à decisão.</p>
+                </details>
+                <details>
+                    <summary>E se a lei mudar amanhã?</summary>
+                    <p style="padding-top:15px; color: var(--text-dim);">Nosso algoritmo é atualizado em tempo real com o Diário Oficial e as decisões do Senado. Qualquer mudança é refletida imediatamente no seu Radar.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- CTA FINAL -->
+        <section style="text-align: center; padding: 120px 7%;">
+            <h2 style="font-size: 2.8rem; margin-bottom: 20px;">O conhecimento liberta, a <span style="color:var(--accent)">estratégia enriquece.</span></h2>
+            <p style="color: var(--text-dim); max-width: 700px; margin: 0 auto 50px;">Não deixe o futuro da sua empresa ao acaso. Garanta clareza e segurança para a nova era fiscal brasileira.</p>
+            <a href="https://pay.kirvano.com/7c527ee5-c1a4-468e-b9fc-4dcd44c496b1" class="btn-main">ATIVAR RADAR ESTRATÉGICO</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="logo">TRIBUTOPRIME <span>RADAR</span></div>
+        <p style="color: var(--text-dim); margin-top: 15px;">A bússola do empresário moderno para a transição fiscal.</p>
+        
+        <div class="disclaimer">
+            Todas as informações são de caráter informativo e de esclarecimento. O uso da ferramenta não dispensa a consulta a profissionais contábeis habilitados para decisões finais e implementações jurídicas.
         </div>
-        <div class="power-item">
-            <h4>&lt; 30s</h4>
-            <p>Tempo de Resposta</p>
-        </div>
-        <div class="power-item">
-            <h4>ZERO</h4>
-            <p>Margem de Erro</p>
-        </div>
-    </div>
-</section>
-
-<section>
-    <h2>ANÁLISE <span class="gradient-text">COMPARATIVA</span></h2>
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>MÉTRICA</th>
-                    <th>MÉTODO TRADICIONAL</th>
-                    <th class="highlight-col">RADAR ENGINE</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Cálculo IBS/CBS</td>
-                    <td>Estimado / Manual</td>
-                    <td class="highlight-col">Exatidão Matemática</td>
-                </tr>
-                <tr>
-                    <td>Custo de Operação</td>
-                    <td>R$ 5.000+ p/ consultoria</td>
-                    <td class="highlight-col">Valor Único Acessível</td>
-                </tr>
-                <tr>
-                    <td>Segurança de Dados</td>
-                    <td>Envio por E-mail</td>
-                    <td class="highlight-col">Criptografia Militar</td>
-                </tr>
-                <tr>
-                    <td>Velocidade</td>
-                    <td>Dias de espera</td>
-                    <td class="highlight-col">Real-Time</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
-
-<section>
-    <h2>PROTOCOLOS DE <span class="gradient-text">ACESSO</span></h2>
-    <div class="faq-grid">
-        <details class="faq-item">
-            <summary>Como o processamento é realizado?</summary>
-            <p>O Radar utiliza uma engine proprietária que cruza seus dados de faturamento com os algoritmos da nova legislação (IBS/CBS), simulando o cenário fiscal completo até 2033.</p>
-        </details>
-        <details class="faq-item">
-            <summary>O sistema é atualizado conforme a lei muda?</summary>
-            <p>Sim. Nossa equipe de engenharia e tributaristas atualiza o core do sistema assim que qualquer nova emenda ou regulamentação é publicada pelo Governo Federal.</p>
-        </details>
-        <details class="faq-item">
-            <summary>Qual o nível de segurança das informações?</summary>
-            <p>Utilizamos padrões de segurança bancária com criptografia AES-256 bits. Seus dados são processados em ambiente isolado e nunca são compartilhados com terceiros.</p>
-        </details>
-    </div>
-</section>
-
-<section style="text-align: center;">
-    <h2 style="margin-bottom: 20px;">PRONTO PARA O <span class="gradient-text">PRÓXIMO NÍVEL?</span></h2>
-    <p style="margin-bottom: 40px; color: var(--text-dim);">Assuma o controle total da sua estratégia tributária hoje mesmo.</p>
-    <a class="btn-main" href="https://pay.kirvano.com/7c527ee5-c1a4-468e-b9fc-4dcd44c496b1">GARANTIR ACESSO IMEDIATO</a>
-</section>
-
-<footer>
-    <div class="badge-tech" style="margin-bottom: 20px;">TRIBUTOPRIME RADAR SYSTEM</div>
-    <p>© 2026 - Tecnologia de Alta Performance para Inteligência Fiscal.</p>
-    <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.5;">A tecnologia que transforma dados fiscais em lucro líquido.</p>
-</footer>
+        
+        <p style="font-size: 0.7rem; color: var(--text-dim);">© 2026 TRIBUTOPRIME RADAR. Protocolos de segurança ativos.</p>
+    </footer>
 
 </body>
 </html>
